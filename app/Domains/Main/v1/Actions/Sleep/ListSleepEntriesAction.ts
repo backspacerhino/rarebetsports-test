@@ -1,4 +1,5 @@
 import { HttpContext } from '@adonisjs/core/http'
+import SleepError from '../../Exceptions/SleepError.js'
 import { ISleepRepository } from '../../Interfaces/Sleep/ISleepRepository.js'
 import { ListSleepEntriesValidatorData } from '../../Interfaces/Validators/ListSleepEntriesValidatorData.js'
 import { SleepRepository } from '../../Repositories/SleepRepository.js'
@@ -16,7 +17,7 @@ export class ListSleepEntriesAction {
       data.maximum_duration &&
       data.minimum_duration > data.maximum_duration
     ) {
-      throw new Error('minimum cant be bigger than maximum') // TODO: Throw proper error
+      throw new SleepError('MIN_DURATION_GREATER_THAN_MAX_DURATION')
     }
     const ctx = HttpContext.getOrFail()
     const authUser = ctx.auth.getUserOrFail()

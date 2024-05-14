@@ -32,7 +32,7 @@ export default defineConfig({
     () => import('@adonisjs/cors/cors_provider'),
     () => import('@adonisjs/lucid/database_provider'),
     () => import('@adonisjs/auth/auth_provider'),
-    () => import('@adonisjs/redis/redis_provider')
+    () => import('@adonisjs/redis/redis_provider'),
   ],
 
   /*
@@ -43,7 +43,11 @@ export default defineConfig({
   | List of modules to import before starting the application.
   |
   */
-  preloads: [() => import('#start/routes'), () => import('#start/kernel'), () => import('#start/events')],
+  preloads: [
+    () => import('#start/routes'),
+    () => import('#start/kernel'),
+    () => import('#start/events'),
+  ],
 
   /*
   |--------------------------------------------------------------------------
@@ -57,12 +61,15 @@ export default defineConfig({
   tests: {
     suites: [
       {
-        files: ['tests/unit/**/*.spec(.ts|.js)'],
+        files: ['app/Domains/**/Unit/*.spec(.ts|.js)'],
         name: 'unit',
         timeout: 2000,
       },
       {
-        files: ['tests/functional/**/*.spec(.ts|.js)'],
+        files: [
+          'app/Domains/**/Functional/*.spec(.ts|.js)',
+          'app/Domains/**/Functional/**/*.spec(.ts|.js)',
+        ],
         name: 'functional',
         timeout: 30000,
       },

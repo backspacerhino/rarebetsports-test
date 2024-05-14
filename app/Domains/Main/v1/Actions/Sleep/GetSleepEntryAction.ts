@@ -1,3 +1,4 @@
+import GeneralError from '#domains/Ship/Exceptions/GeneralError'
 import { ResourceIdValidatorData } from '#domains/Ship/Interfaces/Validators/ResourceIdValidatorData'
 import { HttpContext } from '@adonisjs/core/http'
 import { ISleepRepository } from '../../Interfaces/Sleep/ISleepRepository.js'
@@ -14,7 +15,7 @@ export class GetSleepEntryAction {
     const authUser = ctx.auth.getUserOrFail()
     const result = await this.#sleepRepository.findByOrFail('id', data.id)
     if (result.userId !== authUser.id) {
-      throw new Error('Row not found.') // TODO: FIx error
+      throw new GeneralError('ROW_NOT_FOUND')
     }
     return result
   }

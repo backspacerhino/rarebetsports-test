@@ -11,7 +11,6 @@ export class SleepRepository extends BaseRepository<typeof SleepEntry> implement
 
   public async list(data: ListSleepEntryData) {
     let query = SleepEntry.query()
-
     if (data.data.minimum_duration) {
       query = query.where('duration', '>=', data.data.minimum_duration)
     }

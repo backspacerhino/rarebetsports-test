@@ -9,13 +9,12 @@ export class RegisterUserAction {
     this.#userRepository = new UserRepository()
   }
 
-  // TODO: Fix type
   async run(data: UserData) {
     const user = await this.#userRepository.register({
       email: data.email,
       password: data.password,
     })
-    const token = await User.accessTokens.create(user) // TODO: Move to repo
+    const token = await User.accessTokens.create(user)
     return token
   }
 }

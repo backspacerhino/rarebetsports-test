@@ -1,6 +1,8 @@
+import GeneralError from '#domains/Ship/Exceptions/GeneralError'
 import { HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
 import SleepEntryChanged from '../../Events/SleepEntryChanged.js'
+import SleepError from '../../Exceptions/SleepError.js'
 import { ISleepRepository } from '../../Interfaces/Sleep/ISleepRepository.js'
 import { UpdateSleepEntryValidatorData } from '../../Interfaces/Validators/UpdateSleepEntryValidatorData.js'
 import { SleepRepository } from '../../Repositories/SleepRepository.js'
@@ -40,11 +42,11 @@ export class UpdateSleepEntryAction {
     payload.date = start.toISODate()
 
     if (start > end) {
-      throw new Error('Sleep start cant be later than sleep end') // TODO: Throw proper error
+      throw new SleepError('START_LATER_THAN_END')
     }
 
     if (sleepEntry.userId !== authUser.id) {
-      throw new Error('Row not found.') // TODO: Throw proper error
+      throw new GeneralError('ROW_NOT_FOUND')
     }
 
     const result = await sleepEntry.merge(JSON.parse(JSON.stringify(payload))).save()

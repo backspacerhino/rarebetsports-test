@@ -1,0 +1,1 @@
+export type SleepExceptions = 'START_LATER_THAN_END' | 'MIN_DURATION_GREATER_THAN_MAX_DURATION'
