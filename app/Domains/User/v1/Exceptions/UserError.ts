@@ -1,6 +1,7 @@
-import { UserExceptions } from '../Interfaces/UserExceptionType'
+import { BaseError } from '#domains/Ship/Exceptions/BaseError'
+import { UserExceptions } from '../Interfaces/UserExceptionType.js'
 
-export default class UserError extends Error {
+export default class AuthError extends BaseError {
   constructor(exceptionName: UserExceptions) {
     super(exceptionName)
   }

@@ -17,7 +17,7 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * response to the client
    */
   async handle(error: any, ctx: HttpContext) {
-    let exceptionName = error.code
+    let exceptionName = error.code || ''
     const errors = error.messages
     // This handles built in E_ AdonisJS errors
     if (exceptionName.startsWith('E_')) {

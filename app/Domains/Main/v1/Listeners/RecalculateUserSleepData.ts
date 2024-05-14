@@ -14,7 +14,6 @@ export default class RecalculateUserSleepData {
   }
   async handle(event: SleepEntryCreated) {
     const sleepEntry = event.sleepEntry
-    // TODO: Note that we can store previous week averages in the new table
 
     const currentDate = DateTime.now()
     const weekStart = currentDate.startOf('week')
@@ -25,7 +24,6 @@ export default class RecalculateUserSleepData {
       id: sleepEntry.userId,
       key: 'average_sleep',
     })) as AverageSleepData | null
-
     // Store entirely new avg data for this week if no previous avg data was found or if its a new week
     if (!savedAvgData || savedAvgData.meta.weekStart !== weekStart.toISODate()) {
       const userSleepData: AverageSleepData = {
@@ -41,7 +39,11 @@ export default class RecalculateUserSleepData {
           avgWakeupTimes: sleepEntry.wakeupTimes || 0,
         },
       }
-
+      console.log({
+        id: sleepEntry.userId,
+        key: 'average_sleep',
+        values: userSleepData,
+      })
       await this.#userCacheRepository.saveById({
         id: sleepEntry.userId,
         key: 'average_sleep',
@@ -61,7 +63,7 @@ export default class RecalculateUserSleepData {
       })
       return
     }
-    // TODO: Make a note of this
+
     // We intentionally do not want to handle averages from non-current week inserts
     console.log('Not handling these dates')
   }

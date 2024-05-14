@@ -3,9 +3,9 @@ import { UserExceptions } from '../Interfaces/UserExceptionType.js'
 
 // User errors are 100-199
 export const userExceptions: Record<UserExceptions, CustomException> = {
-  USER_NOT_FOUND: {
+  EMAIL_EXISTS: {
     internalCode: 100,
-    statusCode: 404,
-    message: 'User resource not found.',
+    statusCode: 422,
+    message: 'Email exists.',
   },
 }

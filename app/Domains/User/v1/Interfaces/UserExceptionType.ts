@@ -1,1 +1,1 @@
-export type UserExceptions = 'USER_NOT_FOUND'
+export type UserExceptions = 'EMAIL_EXISTS'

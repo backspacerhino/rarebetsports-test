@@ -11,12 +11,9 @@ interface TransformableData {
 export abstract class BaseTransformer implements ITransformable {
   _transform(data: TransformableData) {
     const code = (data.code ??= 0)
-    const result: Partial<TransformableData> & { data?: Record<string, any> } = {
+    const result: Partial<TransformableData> & { data?: Record<string, any> | null } = {
       code,
-    }
-
-    if (data.payload) {
-      result.data = data.payload
+      data: data.payload,
     }
 
     if (data.meta) {
@@ -29,6 +26,10 @@ export abstract class BaseTransformer implements ITransformable {
 
     if (data.message) {
       result.message = data.message
+    }
+
+    if (code !== 0) {
+      delete result.data
     }
 
     return result

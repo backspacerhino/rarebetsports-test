@@ -16,5 +16,3 @@ router
   .prefix('api/v1')
   .use(middleware.auth())
   .as('api.v1')
-
-// TODO: Note possible "recalculate" endpoint to recalculate averages directly from DB
