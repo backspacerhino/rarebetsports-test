@@ -5,7 +5,6 @@ import { GetStatsTransformer } from '../Transformers/Json/Stats/GetStatsTransfor
 export default class StatsController {
   async getStats(_ctx: HttpContext) {
     const result = await new GetStatsAction().run()
-    console.log('RES', result)
     return new GetStatsTransformer().transform(result)
   }
 }

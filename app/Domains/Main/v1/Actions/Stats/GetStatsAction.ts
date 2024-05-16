@@ -13,10 +13,6 @@ export class GetStatsAction {
   async run(): Promise<AverageSleepData | null> {
     const ctx = HttpContext.getOrFail()
     const authUser = ctx.auth.getUserOrFail()
-    console.log('FIND', {
-      id: authUser.id,
-      key: 'average_sleep',
-    })
     return (await this.#userCacheRepository.findById({
       id: authUser.id,
       key: 'average_sleep',
