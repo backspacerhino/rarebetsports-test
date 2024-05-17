@@ -1,13 +1,16 @@
 import AuthError from '#domains/Auth/v1/Exceptions/AuthError'
+import BaseAction from '#domains/Ship/Actions/BaseAction'
+import IRunnable from '#domains/Ship/Interfaces/IRunnable'
 import { UserRepository } from '#domains/User/v1/Repositories/UserRepository'
 import hash from '@adonisjs/core/services/hash'
 import User from '../../../User/v1/Models/User.js'
 import { IUserRepository } from '../Interfaces/IUserRepository.js'
 import { UserData } from '../Interfaces/UserData.js'
 
-export class LoginUserAction {
+export class LoginUserAction extends BaseAction implements IRunnable {
   #userRepository: IUserRepository
   constructor() {
+    super()
     this.#userRepository = new UserRepository()
   }
 

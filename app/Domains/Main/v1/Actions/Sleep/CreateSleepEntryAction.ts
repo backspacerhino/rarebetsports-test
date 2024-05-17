@@ -1,3 +1,5 @@
+import BaseAction from '#domains/Ship/Actions/BaseAction'
+import IRunnable from '#domains/Ship/Interfaces/IRunnable'
 import { HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
 import SleepEntryCreated from '../../Events/SleepEntryCreated.js'
@@ -6,9 +8,10 @@ import { ISleepRepository } from '../../Interfaces/Sleep/ISleepRepository.js'
 import { CreateSleepEntryValidatorData } from '../../Interfaces/Validators/CreateSleepEntryValidatorData.js'
 import { SleepRepository } from '../../Repositories/SleepRepository.js'
 
-export class CreateSleepEntryAction {
+export class CreateSleepEntryAction extends BaseAction implements IRunnable {
   #sleepRepository: ISleepRepository
   constructor() {
+    super()
     this.#sleepRepository = new SleepRepository()
   }
 

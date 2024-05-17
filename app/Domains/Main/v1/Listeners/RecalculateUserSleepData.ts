@@ -39,11 +39,6 @@ export default class RecalculateUserSleepData {
           avgWakeupTimes: sleepEntry.wakeupTimes || 0,
         },
       }
-      console.log({
-        id: sleepEntry.userId,
-        key: 'average_sleep',
-        values: userSleepData,
-      })
       await this.#userCacheRepository.saveById({
         id: sleepEntry.userId,
         key: 'average_sleep',

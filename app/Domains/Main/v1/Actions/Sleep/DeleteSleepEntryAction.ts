@@ -1,13 +1,16 @@
+import BaseAction from '#domains/Ship/Actions/BaseAction'
+import IRunnable from '#domains/Ship/Interfaces/IRunnable'
 import { ResourceIdValidatorData } from '#domains/Ship/Interfaces/Validators/ResourceIdValidatorData'
 import { HttpContext } from '@adonisjs/core/http'
 import SleepEntryChanged from '../../Events/SleepEntryChanged.js'
 import { ISleepRepository } from '../../Interfaces/Sleep/ISleepRepository.js'
 import { SleepRepository } from '../../Repositories/SleepRepository.js'
 
-export class DeleteSleepEntryAction {
+export class DeleteSleepEntryAction extends BaseAction implements IRunnable {
   #sleepRepository: ISleepRepository
 
   constructor() {
+    super()
     this.#sleepRepository = new SleepRepository()
   }
 
